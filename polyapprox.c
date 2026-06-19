@@ -9,7 +9,6 @@ typedef float (*FuncaoErro)(float, float, float, float, float, float);
 
 // inicializa estruturas de dados e popula com os pontos lidos
 static void polyapprox_init(FuncaoErro calcular_erro /*, AVL *avl, Heap *heap */ ) {
-    // ler os pontos e popular as estruturas de dados
     int count;
     scanf("%d", &count);
 
@@ -28,6 +27,7 @@ static void polyapprox_init(FuncaoErro calcular_erro /*, AVL *avl, Heap *heap */
     
 }
 
+// escolhe a função de erro a ser usada com base no critério escolhido
 static FuncaoErro escolher_funcao_erro(Criterio criterio) {
     switch (criterio) {
         case CRITERIO_AREA:
@@ -43,12 +43,12 @@ static FuncaoErro escolher_funcao_erro(Criterio criterio) {
 static void polyapprox_simplificar(Criterio criterio, float tolerancia /*, avl, heap */) {
     while (1) {
         // Ponto p  = heap_minimo(heap);
-        // if (p.erro >= tolerancia) break;
+        // if (p.erro >= tolerancia) ou heap_vazio(heap) break;
 
-        // heap_extrair_minimo(heap);
+        // heap_extrair_minimo(heap);  
 
         /*
-         * recalcular erros dos pontos adjacentes a p e atualizar no heap
+         * agora vai recalcular erros dos pontos adjacentes a p e atualizar no heap
          */
 
         // Ponto anterior = avl_predecessor(avl, p.x);
@@ -68,7 +68,7 @@ void polyapprox(Criterio criterio, float tolerancia) {
     // cria heap
 
     FuncaoErro funcao_erro = escolher_funcao_erro(criterio);
-    
+
     polyapprox_init(funcao_erro/*, avl, heap*/);
 
     // imprimir saida
