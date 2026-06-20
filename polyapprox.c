@@ -6,6 +6,11 @@
 // função de erro a ser usada para calcular o erro de um ponto, dependendo do critério escolhido
 typedef float (*FuncaoErro)(float, float, float, float, float, float);
 
+// também é pra ter um meio de o heap se comunicar com a avl, para
+// atualizar a posição de um ponto na avl sempre que ele mudar de
+// posição no heap (em qualquer swap interno: inserção, extração do
+// mínimo, ou atualização de prioridade)
+
 
 // inicializa estruturas de dados e popula com os pontos lidos
 static void polyapprox_init(FuncaoErro calcular_erro /*, AVL *avl, Heap *heap */ ) {
@@ -58,7 +63,8 @@ static void polyapprox_simplificar(Criterio criterio, float tolerancia /*, avl, 
 
         // recalcular erro de 'anterior' e 'seguinte' (cada um usando
         // seus próprios vizinhos, que já mudaram com a remoção de p)
-        // e atualizar (ou marcar stale + reinserir) no heap
+        // e atualizar a prioridade deles no heap (decrease-key),
+        // usando a posição guardada na avl pra cada um
     }
 }
 
