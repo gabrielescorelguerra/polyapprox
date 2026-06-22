@@ -5,6 +5,7 @@
 #include "avl.h"
 #include "minheap.h"
 #include "erro.h"
+#include "guloso.h"
 
 typedef float (*FuncaoErro)(float, float, float, float, float, float);
 
@@ -40,13 +41,13 @@ static void polyapprox_init(FuncaoErro calcular_erro, AVL *avl, heap *heap, int 
 
 // escolhe a função de erro a ser usada com base no critério escolhido
 static FuncaoErro escolher_funcao_erro(Criterio criterio) {
-    switch (criterio) {
-        case CRITERIO_AREA:
-            return area_triangulo;
-        case CRITERIO_ALTURA:
-            return altura2_triangulo;
-    }
-    return NULL;
+    //switch (criterio) {
+        //case CRITERIO_AREA:
+          //  return area_triangulo;
+       // case CRITERIO_ALTURA:
+         //   return altura2_triangulo;
+    
+   // return NULL;
 }
 
 
@@ -93,6 +94,8 @@ void polyapprox(Criterio criterio, float tolerancia ) {
     }
 
     polyapprox_init(funcao_erro, avl, heap, quantidade_inicial);
+
+    guloso_simplificar(avl, heap, tolerancia, criterio);
 
     printf ("%d\n", (heap->tam + 2));
     inorder_tree_walk(avl);
