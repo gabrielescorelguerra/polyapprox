@@ -5,5 +5,6 @@
 
 float area_triangulo(float x1, float y1, float x2, float y2, float x3, float y3);
 float altura2_triangulo(float x1, float y1, float x2, float y2, float x3, float y3);
+float calcula_erro(No *a1, No *a2, No *a3, Criterio criterio);
 
 #endif

@@ -1,17 +1,8 @@
 #include <math.h>
-#include "guloso.h"
-#include "erro.h"
 #include <stdio.h>
 
-// decide qual fórmula de erro aplicar com base no critério escolhido
-// (-a usa área do triângulo, -h usa altura² do triângulo)
-float calcula_erro(No *a1, No *a2, No *a3, Criterio criterio){
-    if (criterio == CRITERIO_AREA){
-        return area_triangulo(a1->x, a1->y, a2->x, a2->y, a3->x, a3->y);
-    } else{
-        return altura2_triangulo(a1->x, a1->y, a2->x, a2->y, a3->x, a3->y);
-    }
-}
+#include "guloso.h"
+#include "erro.h"
 
 void guloso_simplificar(AVL *avl, heap *heap, float tolerancia, Criterio criterio){
     while(!HeapVazio (heap)){
