@@ -277,7 +277,7 @@ static void inorder (No *x) {
         return;
 
     inorder (x->esq);
-    printf ("%.2f %f\n", x->x, x->y);
+    printf ("%.1f %g\n", x->x, x->y);
     inorder (x->dir);
 }
 
