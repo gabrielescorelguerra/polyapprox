@@ -10,16 +10,16 @@ ORGANIZAÇÃO DO CÓDIGO FONTE
 
 - O código fonte foi organizado da seguinte forma:
 
-- AVL : Arquivo (avl.c e avl.h) que servem para criar e realizar operações em uma arvore binaria AVL.
-- Minheap: Arquivo (minheap.c e minheap.h) que servem para criar e realizar operações em uma estrutura
+- AVL : Arquivos (avl.c e avl.h) que servem para criar e realizar operações em uma árvore binária AVL.
+- Minheap: Arquivos (minheap.c e minheap.h) que servem para criar e realizar operações em uma estrutura
 de dados minheap.
-- Polyaprox: Arquivo que contem a estrutura principal do programa: vai criar a AVL e o Minheap, receber os pontos
-e inserir eles na AVL e depois no Minheap, chamar o algoritmo guloso que remove os pontos menos relevantes para a
+- Polyaprox: Arquivos que contem a estrutura principal do programa: vai criar a AVL e o Minheap, receber os pontos
+e inseri-los na AVL e depois no Minheap, chamar o algoritmo guloso que remove os pontos menos relevantes para a
 imagem, imprimir os pontos que sobraram e finalmente destruir as estruturas de dados criadas.
-- Guloso: Arquivo que contem o algoritmo guloso que realiza a remoção dos pontos com menor erro: remove o menor valor
+- Guloso: Arquivos que contem o algoritmo guloso que realiza a remoção dos pontos com menor erro: remove o menor valor
 do heap enquanto ele tiver erro menor que a tolerancia aceita. Ao remover, atualiza a lista duplamente encadeada (ponteiros
 anterior e proximo do nó), remove da AVL e recalcula os erros dos pontos que estavam ao lado do removido, atualizando no minheap.
-- Erro : Arquivo que contém os algoritmos de calculo da área do triângulo formado por 3 pontos e da distância² do ponto do meio
+- Erro : Arquivos que contém os algoritmos de calculo da área do triângulo formado por 3 pontos e da distância² do ponto do meio
 até a linha formada entre os pontos ao lado desse ponto.
 
 ====================
