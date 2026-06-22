@@ -5,52 +5,6 @@
 #include "minheap.h"
 #include "avl.h"
 
-/*
-typedef struct No
-{
-    float x;
-    float y;
-
-    int pos_heap;
-    float erro;
-
-    int altura;
-    struct No *pai, *esq, *dir;
-    struct No *ant, *prox;
-}No;
-*/
-
-/* coloquei no .h 
-typedef struct heap{
-    int tam;
-    int capacidade;
-    struct No **no;
-}heap;
-*/
-
-/* 
-    // ja esta na avl, como heap usa os pontos da avl, nao precisa criar outro no
-
-    No* no_criar(float x_ponto, float y_ponto) {
-    No *no;
-    if (! (no = malloc (sizeof (No))))
-        return NULL;
-
-    no->x = x_ponto;
-    no->y = y_ponto;
-
-    no->altura = 0;
-    no->pos_heap = -1;
-
-    no->pai = NULL;
-    no->esq = NULL;
-    no->dir = NULL;
-
-    no->prox = NULL;
-    no->ant = NULL;
-
-    return no;
-} */
 
 int HeapVazio(heap *h) {
     if(h == NULL || h->tam < 1)
@@ -196,23 +150,6 @@ void DestroiHeap(heap *h) {
     free(h);
 }
 
-/* da pra ser os 6 floats ou mandar o no e usar no->x, no->y
-float area_triangulo(ponto1, ponto2, ponto3){
-    float area = (ponto1->x * (ponto2->y - ponto3->y) + ponto2->x * (ponto3->y - ponto1->y) + ponto3->x * (ponto1->y - ponto2->y)) / 2;
-    if (area < 0)
-        area = -area;
-    return area;
-}
-
-float altura2_triangulo(p1, p2, p3){
-    float area, dx, dy;
-    area = area_triangulo(p1, p2, p3);
-    dx = p3->x - p1->x;
-    dy = p3->y - p1->y;
-    return 4 * (area * area)/(dx * dx + dy * dy);
-}
-*/
-
 /*
 int main(){
     int w;
@@ -263,4 +200,4 @@ int main(){
         }
     }while(w != 0);
 }
-    */
+*/

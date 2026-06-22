@@ -5,27 +5,18 @@
 #include "avl.h"
 #include "minheap.h"
 
-
-// função de erro a ser usada para calcular o erro de um ponto, dependendo do critério escolhido
 typedef float (*FuncaoErro)(float, float, float, float, float, float);
-
-// também é pra ter um meio de o heap se comunicar com a avl, para
-// atualizar a posição de um ponto na avl sempre que ele mudar de
-// posição no heap (em qualquer swap interno: inserção, extração do
-// mínimo, ou atualização de prioridade)
-
 
 // inicializa estruturas de dados e popula com os pontos lidos
 static void polyapprox_init(FuncaoErro calcular_erro, AVL *avl, heap *heap, int quantidade_inicial) {
-    // prox e ult so funciona se colocar em ordem
     No *ultimo = NULL;
 
     // inserir pontos na avl, setando ponteiros ant e prox de cada no (lista encadeada entre eles)
     for (int i = 0; i < quantidade_inicial; i++) {
-        float x, y;
-        scanf("%f %f", &x, &y);
+        float y;
+        scanf("%f", &y);
 
-        No *p = no_criar(x, y);
+        No *p = no_criar(i + 1, y);
 
         p->ant = ultimo;
         if (ultimo != NULL)
@@ -40,7 +31,7 @@ static void polyapprox_init(FuncaoErro calcular_erro, AVL *avl, heap *heap, int 
 
     // calcular erros e inserir no heap , ele vai conter so os pontos removiveis
     while (head->prox != NULL) {
-        head->erro = calcular_erro(head->ant->x, head->ant->y, head->x, head->y, head->prox->x, head->prox->y);
+        // head->erro = calcular_erro(head->ant->x, head->ant->y, head->x, head->y, head->prox->x, head->prox->y);
         InsereHeap(heap, head);
         head = head->prox;
     }
@@ -50,9 +41,9 @@ static void polyapprox_init(FuncaoErro calcular_erro, AVL *avl, heap *heap, int 
 static FuncaoErro escolher_funcao_erro(Criterio criterio) {
     switch (criterio) {
         case CRITERIO_AREA:
-            return area_triangulo; // vai retornar funcao de erro que calcula area do triangulo formado por 3 pontos
+            return NULL; //area_triangulo;
         case CRITERIO_ALTURA:
-            return altura_triangulo; // vai retornar funcao de erro que calcula altura do triangulo formado por 3 pontos
+            return NULL; //altura_triangulo;
     }
     return NULL;
 }
@@ -94,15 +85,15 @@ void polyapprox(Criterio criterio, float tolerancia ) {
         return;
     }
 
-    FuncaoErro funcao_erro = escolher_funcao_erro(criterio);
-    if (funcao_erro == NULL) {
-        printf("Erro: função de erro não definida para o critério escolhido.\n");
-        return;
-    }
+    //FuncaoErro funcao_erro = escolher_funcao_erro(criterio);
+    //if (funcao_erro == NULL) {
+    //    printf("Erro: função de erro não definida para o critério escolhido.\n");
+    //    return;
+    //}
 
-    polyapprox_init(funcao_erro, avl, heap, quantidade_inicial);
+    polyapprox_init(NULL, /*funcao_erro,*/ avl, heap, quantidade_inicial);
 
-    printf ("%d\n", (heap->tam + 2)); // soma 2 porque heap nao vai ter extremos
+    printf ("%d\n", (heap->tam + 2));
     inorder_tree_walk(avl);
 
     DestroiHeap(heap);
