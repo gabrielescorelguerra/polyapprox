@@ -1,5 +1,6 @@
 #include <math.h>
 #include "guloso.h"
+#include "erro.h"
 #include <stdio.h>
 
 // decide qual fórmula de erro aplicar com base no critério escolhido

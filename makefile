@@ -3,9 +3,9 @@ CFLAGS = -Wall -Wextra
 
 OBJ_DIR = build
 
-OBJ = $(OBJ_DIR)/polyapprox.o $(OBJ_DIR)/avl.o $(OBJ_DIR)/minheap.o $(OBJ_DIR)/erro.o
-HEADERS = polyapprox.h avl.h minheap.h erro.h
-SRC = polyapprox.c avl.c minheap.c erro.c
+OBJ = $(OBJ_DIR)/polyapprox.o $(OBJ_DIR)/avl.o $(OBJ_DIR)/minheap.o $(OBJ_DIR)/erro.o $(OBJ_DIR)/guloso.o 
+HEADERS = polyapprox.h avl.h minheap.h erro.h guloso.h
+SRC = polyapprox.c avl.c minheap.c erro.c guloso.c
 
 all: polyapprox
 
