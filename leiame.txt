@@ -21,7 +21,7 @@ do heap enquanto ele tiver erro menor que a tolerancia aceita. Ao remover, atual
 anterior e proximo do nó), remove da AVL e recalcula os erros dos pontos que estavam ao lado do removido, atualizando no minheap.
 - Erro : Arquivos que contém os algoritmos de calculo da área do triângulo formado por 3 pontos e da distância² do ponto do meio
 até a linha formada entre os pontos ao lado desse ponto.
-- Main : Função main, lê a entrada inicial e cancela em casos errados, chama a função principal polyaprox
+- Main : Função main, lê a entrada inicial e cancela em casos invalidos, chama a função principal polyaprox
 
 ====================
 
