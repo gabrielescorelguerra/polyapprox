@@ -7,10 +7,8 @@
 #include "erro.h"
 #include "guloso.h"
 
-typedef float (*FuncaoErro)(float, float, float, float, float, float);
-
 // inicializa estruturas de dados e popula com os pontos lidos
-static void polyapprox_init(FuncaoErro calcular_erro, AVL *avl, heap *heap, int quantidade_inicial) {
+static void polyapprox_init(AVL *avl, heap *heap, Criterio criterio, int quantidade_inicial) {
     No *ultimo = NULL;
 
     // inserir pontos na avl, setando ponteiros ant e prox de cada no (lista encadeada entre eles)
@@ -33,45 +31,9 @@ static void polyapprox_init(FuncaoErro calcular_erro, AVL *avl, heap *heap, int 
 
     // calcular erros e inserir no heap , ele vai conter so os pontos removiveis
     while (head->prox != NULL) {
-        head->erro = calcular_erro(head->ant->x, head->ant->y, head->x, head->y, head->prox->x, head->prox->y);
+        head->erro = calcula_erro(head->ant, head, head->prox, criterio);
         InsereHeap(heap, head);
         head = head->prox;
-    }
-}
-
-// escolhe a função de erro a ser usada com base no critério escolhido
-static FuncaoErro escolher_funcao_erro(Criterio criterio) {
-    //switch (criterio) {
-        //case CRITERIO_AREA:
-          //  return area_triangulo;
-       // case CRITERIO_ALTURA:
-         //   return altura2_triangulo;
-    
-   // return NULL;
-}
-
-
-// algoritmo guloso que remove pontos dentro da tolerância
-static void polyapprox_simplificar(Criterio criterio, float tolerancia /*, avl, heap */) {
-    while (1) {
-        // Ponto p  = heap_minimo(heap);
-        // if (p.erro >= tolerancia) ou heap_vazio(heap) break;
-
-        // heap_extrair_minimo(heap);  
-
-        /*
-         * agora vai recalcular erros dos pontos adjacentes a p e atualizar no heap
-         */
-
-        // Ponto anterior = avl_predecessor(avl, p.x);
-        // Ponto seguinte = avl_sucessor(avl, p.x);
-
-        // avl_remover(avl, p.x);
-
-        // recalcular erro de 'anterior' e 'seguinte' (cada um usando
-        // seus próprios vizinhos, que já mudaram com a remoção de p)
-        // e atualizar a prioridade deles no heap (decrease-key),
-        // usando a posição guardada na avl pra cada um
     }
 }
 
@@ -87,13 +49,7 @@ void polyapprox(Criterio criterio, float tolerancia ) {
         return;
     }
 
-    FuncaoErro funcao_erro = escolher_funcao_erro(criterio);
-    if (funcao_erro == NULL) {
-        printf("Erro: função de erro não definida para o critério escolhido.\n");
-        return;
-    }
-
-    polyapprox_init(funcao_erro, avl, heap, quantidade_inicial);
+    polyapprox_init(avl, heap, criterio, quantidade_inicial);
 
     guloso_simplificar(avl, heap, tolerancia, criterio);
 
