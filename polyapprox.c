@@ -40,8 +40,8 @@ static void polyapprox_init(FuncaoErro calcular_erro, AVL *avl, heap *heap, int 
 
     // calcular erros e inserir no heap , ele vai conter so os pontos removiveis
     while (head->prox != NULL) {
-        // head->erro = calcular_erro(head->ant->x, head->ant->y, head->x, head->y, head->prox->x, head->prox->y);
-        InsereHeap(heap, head);  // atualiza posicao pos_heap do ponto
+        head->erro = calcular_erro(head->ant->x, head->ant->y, head->x, head->y, head->prox->x, head->prox->y);
+        InsereHeap(heap, head);
         head = head->prox;
     }
 }
@@ -50,9 +50,9 @@ static void polyapprox_init(FuncaoErro calcular_erro, AVL *avl, heap *heap, int 
 static FuncaoErro escolher_funcao_erro(Criterio criterio) {
     switch (criterio) {
         case CRITERIO_AREA:
-            return NULL; // vai retornar funcao de erro que calcula area do triangulo formado por 3 pontos
+            return area_triangulo; // vai retornar funcao de erro que calcula area do triangulo formado por 3 pontos
         case CRITERIO_ALTURA:
-            return NULL; // vai retornar funcao de erro que calcula altura do triangulo formado por 3 pontos
+            return altura_triangulo; // vai retornar funcao de erro que calcula altura do triangulo formado por 3 pontos
     }
     return NULL;
 }
