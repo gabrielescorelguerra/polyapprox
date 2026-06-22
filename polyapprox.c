@@ -4,6 +4,7 @@
 #include "types.h"
 #include "avl.h"
 #include "minheap.h"
+#include "erro.h"
 
 typedef float (*FuncaoErro)(float, float, float, float, float, float);
 
@@ -31,7 +32,7 @@ static void polyapprox_init(FuncaoErro calcular_erro, AVL *avl, heap *heap, int 
 
     // calcular erros e inserir no heap , ele vai conter so os pontos removiveis
     while (head->prox != NULL) {
-        // head->erro = calcular_erro(head->ant->x, head->ant->y, head->x, head->y, head->prox->x, head->prox->y);
+        head->erro = calcular_erro(head->ant->x, head->ant->y, head->x, head->y, head->prox->x, head->prox->y);
         InsereHeap(heap, head);
         head = head->prox;
     }
@@ -41,9 +42,9 @@ static void polyapprox_init(FuncaoErro calcular_erro, AVL *avl, heap *heap, int 
 static FuncaoErro escolher_funcao_erro(Criterio criterio) {
     switch (criterio) {
         case CRITERIO_AREA:
-            return NULL; //area_triangulo;
+            return area_triangulo;
         case CRITERIO_ALTURA:
-            return NULL; //altura_triangulo;
+            return altura2_triangulo;
     }
     return NULL;
 }
@@ -85,13 +86,13 @@ void polyapprox(Criterio criterio, float tolerancia ) {
         return;
     }
 
-    //FuncaoErro funcao_erro = escolher_funcao_erro(criterio);
-    //if (funcao_erro == NULL) {
-    //    printf("Erro: função de erro não definida para o critério escolhido.\n");
-    //    return;
-    //}
+    FuncaoErro funcao_erro = escolher_funcao_erro(criterio);
+    if (funcao_erro == NULL) {
+        printf("Erro: função de erro não definida para o critério escolhido.\n");
+        return;
+    }
 
-    polyapprox_init(NULL, /*funcao_erro,*/ avl, heap, quantidade_inicial);
+    polyapprox_init(funcao_erro, avl, heap, quantidade_inicial);
 
     printf ("%d\n", (heap->tam + 2));
     inorder_tree_walk(avl);
