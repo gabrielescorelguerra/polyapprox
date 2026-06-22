@@ -37,6 +37,7 @@ No* no_criar(float x_ponto, float y_ponto) {
 
     no->altura = 0;
     no->pos_heap = -1;
+    no->erro = 0;
 
     no->pai = NULL;
     no->esq = NULL;
@@ -89,7 +90,7 @@ static void transplante(AVL *t, No *u, No *v) {
 }
  
 
-static No* arvore_minimo(No *x) {
+No* arvore_minimo(No *x) {
     while(x->esq != NULL)
         x = x->esq;
     return x;
@@ -276,7 +277,7 @@ static void inorder (No *x) {
         return;
 
     inorder (x->esq);
-    printf ("(%f, %f) ", x->x, x->y);
+    printf ("%.2f %f\n", x->x, x->y);
     inorder (x->dir);
 }
 

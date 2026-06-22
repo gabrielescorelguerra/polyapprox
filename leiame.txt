@@ -16,6 +16,8 @@ ESTRUTURAS DE DADOS UTILIZADAS
 
 - 
 
+avl e heap logn
+
 ====================
 
 OUTRAS INFORMAÇÕES

@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "minheap.h"
+#include "avl.h"
+
+/*
 typedef struct No
 {
     float x;
@@ -14,16 +18,20 @@ typedef struct No
     struct No *pai, *esq, *dir;
     struct No *ant, *prox;
 }No;
+*/
 
-
+/* coloquei no .h 
 typedef struct heap{
     int tam;
     int capacidade;
     struct No **no;
 }heap;
+*/
 
+/* 
+    // ja esta na avl, como heap usa os pontos da avl, nao precisa criar outro no
 
-No* no_criar(float x_ponto, float y_ponto) {
+    No* no_criar(float x_ponto, float y_ponto) {
     No *no;
     if (! (no = malloc (sizeof (No))))
         return NULL;
@@ -42,7 +50,7 @@ No* no_criar(float x_ponto, float y_ponto) {
     no->ant = NULL;
 
     return no;
-}
+} */
 
 int HeapVazio(heap *h) {
     if(h == NULL || h->tam < 1)
@@ -50,7 +58,7 @@ int HeapVazio(heap *h) {
     return 0;
 }
 
-heap *cria_heap(int capacidade){
+heap *cria_heap(int capacidade) {
     heap *h = malloc(sizeof(struct heap));
     if (h == NULL)
         return NULL;
@@ -60,7 +68,7 @@ heap *cria_heap(int capacidade){
     return h;
 }
 
-int InsereHeap(heap *h, No *n){
+int InsereHeap(heap *h, No *n) {
     int i;
     struct No *aux;
 
@@ -129,13 +137,13 @@ void Heapify(heap *h) {
     }
 }
 
-No *HeapMinino(heap *h){
+No *HeapMinino(heap *h) {
     if (HeapVazio(h))
         return NULL;
     return h->no[1];
 }
 
-No *RemoveHeap(heap *h){
+No *RemoveHeap(heap *h) {
     No *n;
     if (HeapVazio(h)){
         return NULL;
@@ -154,7 +162,7 @@ No *RemoveHeap(heap *h){
     return n;
 }
 
-void AtualizaHeap(heap *h, int pos_heap, int novo_erro){
+void AtualizaHeap(heap *h, int pos_heap, float novo_erro) {
     if (h == NULL || h->tam < 1 || pos_heap < 1 || pos_heap > h->tam)
         return;
     float erro_antes = h->no[pos_heap]->erro;
@@ -181,6 +189,13 @@ void ImprimeHeap(heap *h) {
         printf("(%f %f) %f, %d\n", h->no[i]->x, h->no[i]->y, h->no[i]->erro, h->no[i]->pos_heap);
 }
 
+void DestroiHeap(heap *h) {
+    if (h == NULL)
+        return;
+    free(h->no);
+    free(h);
+}
+
 /* da pra ser os 6 floats ou mandar o no e usar no->x, no->y
 float area_triangulo(ponto1, ponto2, ponto3){
     float area = (ponto1->x * (ponto2->y - ponto3->y) + ponto2->x * (ponto3->y - ponto1->y) + ponto3->x * (ponto1->y - ponto2->y)) / 2;
@@ -198,6 +213,7 @@ float altura2_triangulo(p1, p2, p3){
 }
 */
 
+/*
 int main(){
     int w;
     float x, y, erro;
@@ -247,3 +263,4 @@ int main(){
         }
     }while(w != 0);
 }
+    */

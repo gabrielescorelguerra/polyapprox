@@ -11,6 +11,7 @@ typedef struct No {
     float y;
 
     int pos_heap; // posicao do ponto no heap
+    float erro; // erro do ponto
 
     int altura;
     struct No *pai;
@@ -39,5 +40,7 @@ void avl_inserir(AVL *t, No *z);
 void avl_remover(AVL *t, No *z);
 
 void inorder_tree_walk (AVL *t);
+
+No* arvore_minimo(No *x);
 
 #endif
